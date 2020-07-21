@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import StoreKit
 
 class BillingViewController: UIViewController {
+    
+    let productIdentifiers = ["productIdentifiers1"]
     
     private let dismissButton: UIButton = {
         let button = UIButton()
@@ -42,6 +45,30 @@ class BillingViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // 課金開始
+    private func puchase(productIdentifer: String) {
+        PurchaseManeger.shared.delegate = self
+        
+        // プロダクト情報を取得
+        ProductManager.request(productIdentifir: productIdentifer, completion: { [weak self] (product: SKProduct?, error: Error?) in
+            guard error == nil, let product = product else {
+                self?.purchaseManager(PurchaseManeger.shared, didFailTransactionWithError: error)
+                return
+            }
+            // 課金処理開始
+            PurchaseManeger.shared.purchase(product: product)
+        })
+    }
+    
+    // リストア開始
+    private func startRestore() {
+        // デリゲート設定
+        PurchaseManeger.shared.delegate = self
+        
+        // リストア開始
+        PurchaseManeger.shared.restore()
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -53,4 +80,8 @@ class BillingViewController: UIViewController {
     }
     */
 
+}
+
+extension BillingViewController: PurchaseManagerDelegate {
+    
 }

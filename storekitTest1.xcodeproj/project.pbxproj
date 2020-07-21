@@ -14,6 +14,8 @@
 		8D51796724C6A0FA00CD2DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D51796624C6A0FA00CD2DA1 /* Assets.xcassets */; };
 		8D51796A24C6A0FA00CD2DA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D51796824C6A0FA00CD2DA1 /* LaunchScreen.storyboard */; };
 		8D51797224C6A2A800CD2DA1 /* BillingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51797124C6A2A800CD2DA1 /* BillingViewController.swift */; };
+		8D51797424C6A5DB00CD2DA1 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51797324C6A5DB00CD2DA1 /* ProductManager.swift */; };
+		8D51797624C6E97700CD2DA1 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51797524C6E97700CD2DA1 /* PurchaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		8D51796924C6A0FA00CD2DA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D51796B24C6A0FA00CD2DA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D51797124C6A2A800CD2DA1 /* BillingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingViewController.swift; sourceTree = "<group>"; };
+		8D51797324C6A5DB00CD2DA1 /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
+		8D51797524C6E97700CD2DA1 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 				8D51795F24C6A0F800CD2DA1 /* SceneDelegate.swift */,
 				8D51796124C6A0F800CD2DA1 /* ViewController.swift */,
 				8D51797124C6A2A800CD2DA1 /* BillingViewController.swift */,
+				8D51797324C6A5DB00CD2DA1 /* ProductManager.swift */,
+				8D51797524C6E97700CD2DA1 /* PurchaseManager.swift */,
 				8D51796324C6A0F800CD2DA1 /* Main.storyboard */,
 				8D51796624C6A0FA00CD2DA1 /* Assets.xcassets */,
 				8D51796824C6A0FA00CD2DA1 /* LaunchScreen.storyboard */,
@@ -142,8 +148,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D51796224C6A0F800CD2DA1 /* ViewController.swift in Sources */,
+				8D51797424C6A5DB00CD2DA1 /* ProductManager.swift in Sources */,
 				8D51795E24C6A0F800CD2DA1 /* AppDelegate.swift in Sources */,
 				8D51797224C6A2A800CD2DA1 /* BillingViewController.swift in Sources */,
+				8D51797624C6E97700CD2DA1 /* PurchaseManager.swift in Sources */,
 				8D51796024C6A0F800CD2DA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
