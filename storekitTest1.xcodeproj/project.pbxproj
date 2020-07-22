@@ -16,6 +16,7 @@
 		8D51797224C6A2A800CD2DA1 /* BillingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51797124C6A2A800CD2DA1 /* BillingViewController.swift */; };
 		8D51797424C6A5DB00CD2DA1 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51797324C6A5DB00CD2DA1 /* ProductManager.swift */; };
 		8D51797624C6E97700CD2DA1 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D51797524C6E97700CD2DA1 /* PurchaseManager.swift */; };
+		8DAD1B4F24C7DF4100EA3566 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAD1B4E24C7DF4100EA3566 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8D51797124C6A2A800CD2DA1 /* BillingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingViewController.swift; sourceTree = "<group>"; };
 		8D51797324C6A5DB00CD2DA1 /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 		8D51797524C6E97700CD2DA1 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		8DAD1B4E24C7DF4100EA3566 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DAD1B4F24C7DF4100EA3566 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +51,7 @@
 			children = (
 				8D51795C24C6A0F800CD2DA1 /* storekitTest1 */,
 				8D51795B24C6A0F800CD2DA1 /* Products */,
+				8DAD1B4D24C7DF4100EA3566 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +78,14 @@
 				8D51796B24C6A0FA00CD2DA1 /* Info.plist */,
 			);
 			path = storekitTest1;
+			sourceTree = "<group>";
+		};
+		8DAD1B4D24C7DF4100EA3566 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DAD1B4E24C7DF4100EA3566 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

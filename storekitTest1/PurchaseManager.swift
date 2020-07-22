@@ -82,8 +82,10 @@ open class PurchaseManeger: NSObject {
                         strongSelf.completeTransaction(transaction)
                     }
                 })
-                ac.addAction(action)
-                window?.rootViewController?.present(ac, animated: true)
+                DispatchQueue.main.async {
+                    ac.addAction(action)
+                    window?.rootViewController?.present(ac, animated: true)
+                }
                 return
             }
         }

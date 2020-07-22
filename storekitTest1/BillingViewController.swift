@@ -20,6 +20,14 @@ class BillingViewController: UIViewController {
         button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         return button
     }()
+    
+    private let purchaseButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        button.setTitle("課金開始", for: .normal)
+        button.addTarget(self, action: #selector(purchaseButtonPressed), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,9 @@ class BillingViewController: UIViewController {
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dismissButton)
         
+        purchaseButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(purchaseButton)
+        
         let dismissConstraints = [
             dismissButton.widthAnchor.constraint(equalToConstant: 200),
             dismissButton.heightAnchor.constraint(equalToConstant: 50),
@@ -37,6 +48,15 @@ class BillingViewController: UIViewController {
         ]
         
         NSLayoutConstraint.activate(dismissConstraints)
+        
+        let purchaseButtonConstraints = [
+            purchaseButton.widthAnchor.constraint(equalToConstant: 200),
+            purchaseButton.heightAnchor.constraint(equalToConstant: 50),
+            purchaseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            purchaseButton.bottomAnchor.constraint(equalTo: dismissButton.topAnchor, constant: -50)
+        ]
+        
+        NSLayoutConstraint.activate(purchaseButtonConstraints)
 
         // Do any additional setup after loading the view.
     }
@@ -45,8 +65,13 @@ class BillingViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc func purchaseButtonPressed() {
+        startPuchase(productIdentifer: productIdentifiers.first!)
+    }
+    
     // 課金開始
-    private func puchase(productIdentifer: String) {
+    private func startPuchase(productIdentifer: String) {
+        
         PurchaseManeger.shared.delegate = self
         
         // プロダクト情報を取得
@@ -84,4 +109,57 @@ class BillingViewController: UIViewController {
 
 extension BillingViewController: PurchaseManagerDelegate {
     
+    func purchaseManager(_ purchaseManager: PurchaseManeger, didFinishTransaction transaction: SKPaymentTransaction, decitionHandler: (Bool) -> Void) {
+        // 課金終了時に呼び出される
+        
+            let ac = UIAlertController(title: "purchase finish", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(ac, animated: true)
+        
+        // コンテンツ解放が終了したら、この処理を実行(true: 課金処理全部終了, false: 課金処理中断)
+        decitionHandler(true)
+    }
+    
+    func purchaseManager(_ purchaseManager: PurchaseManeger, didFinishUntreatedTransaction transaction: SKPaymentTransaction, decitionHandler: (Bool) -> Void) {
+        // 課金終了時に呼び出される(startPurchaseで指定したプロダクトID以外のものが課金された時)
+        
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "purchase finish(Untreated.)", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(ac, animated: true)
+            
+        }
+        decitionHandler(true)
+    }
+    
+    func purchaseManager(_ purchaseManager: PurchaseManeger, didFailTransactionWithError error: Error?) {
+        // 課金失敗時に呼び出される
+        
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "purchase fail", message: error?.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(ac, animated: true)
+        }
+        
+    }
+    
+    func purchaseManagerDidFinishRestore(_ purchaseManager: PurchaseManeger) {
+        // リストア終了時に呼び出される(個々のトランザクションは"課金終了"で処理)
+        
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "restore finish", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(ac, animated: true)
+        }
+    }
+    
+    func purchaseManagerDidDeferred(_ purchaseManager: PurchaseManeger) {
+        // 承認待ち状態時に呼び出される
+        
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "purchase deferred", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(ac, animated: true)
+        }
+    }
 }
