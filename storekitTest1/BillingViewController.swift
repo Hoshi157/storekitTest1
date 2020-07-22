@@ -28,6 +28,13 @@ class BillingViewController: UIViewController {
         button.addTarget(self, action: #selector(purchaseButtonPressed), for: .touchUpInside)
         return button
     }()
+    
+    private var priceText: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        textField.textAlignment = .center
+        return textField
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +46,9 @@ class BillingViewController: UIViewController {
         
         purchaseButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(purchaseButton)
+        
+        priceText.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(priceText)
         
         let dismissConstraints = [
             dismissButton.widthAnchor.constraint(equalToConstant: 200),
@@ -57,6 +67,21 @@ class BillingViewController: UIViewController {
         ]
         
         NSLayoutConstraint.activate(purchaseButtonConstraints)
+        
+        let pricetextConstraints = [
+            priceText.heightAnchor.constraint(equalToConstant: 50),
+            priceText.widthAnchor.constraint(equalToConstant: 150),
+            priceText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            priceText.topAnchor.constraint(equalTo: view.topAnchor, constant: 100)
+        ]
+        
+        NSLayoutConstraint.activate(pricetextConstraints)
+        
+        
+        
+        displayToTextOfPrice()
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -92,6 +117,30 @@ class BillingViewController: UIViewController {
         
         // リストア開始
         PurchaseManeger.shared.restore()
+    }
+    
+    // 価格をテキストに表示する
+    private func displayToTextOfPrice() {
+        
+        // プロダクト情報を取得
+        ProductManager.request(productIdentifirs: productIdentifiers, completion: { [weak self] (products: [SKProduct], error: Error?) in
+            
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    self?.priceText.text = "エラー"
+                }
+                return
+            }
+            
+            for product in products {
+                // 価格を抽出
+                let priceString = product.localizedPrice ?? "取得できず"
+                
+                DispatchQueue.main.async {
+                    self?.priceText.text = priceString
+                }
+            }
+        })
     }
     
 
